@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PULL: Magnet Sort</title><link rel="icon" href="icon.png"><link rel="stylesheet" href="style.css"></head>
+<body><main><header><img src="icon.png" alt=""><a href="index.html">PULL: Magnet Sort</a></header>
+<h1>Peel the picture, bead by bead.</h1>
+<p>Place magnets to pull matching beads off a hidden picture. Clear every bead to reveal it. Free to play on iPhone and Android.</p>
+<div class="card"><p><strong>Get PULL</strong></p>
+<a class="btn" id="get" href="#">Join the beta on iPhone</a>
+<p class="muted" id="note">The App Store and Google Play pages open here as soon as PULL is live.</p></div>
+<script>
+// Store links are filled in at launch; until then the beta link is used.
+var LINKS={beta:"",appStore:"",play:""};
+var a=document.getElementById('get');
+if(LINKS.appStore){a.href=LINKS.appStore;a.textContent='Download on the App Store';}
+else if(LINKS.beta){a.href=LINKS.beta;}
+else{a.style.display='none';}
+</script>
+<nav><a href="index.html">Home</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="support.html">Support</a></nav>
+<p class="muted">PULL is made by Roots No Limits LLC, 1021 E Lincolnway #7030, Cheyenne, WY 82001, USA.</p>
+</main></body></html>
