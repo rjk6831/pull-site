@@ -1,0 +1,48 @@
+<!doctype html><meta charset="utf-8"><style>
+*{margin:0;box-sizing:border-box}
+body{width:1200px;height:630px;overflow:hidden;position:relative;font-family:Inter,"Helvetica Neue",Arial,sans-serif;color:#FFF4E0;
+background:radial-gradient(900px 600px at 85% 30%,#3a3578 0%,#2A2752 38%,#1B1A33 78%)}
+canvas{position:absolute;inset:0}
+.icon{position:absolute;left:72px;top:72px;width:150px;height:150px;border-radius:34px;box-shadow:0 14px 40px rgba(0,0,0,.45)}
+h1{position:absolute;left:72px;top:244px;font-size:92px;line-height:1;font-weight:800;letter-spacing:-2px;width:640px}
+h1 span{display:block;color:#F5C451;font-size:60px;letter-spacing:-1px;margin-top:10px}
+p{position:absolute;left:72px;top:424px;font-size:38px;font-weight:500;color:#E5DDF7;width:600px;line-height:1.25}
+.pill{position:absolute;left:72px;bottom:52px;background:#FF7A66;color:#1B1A33;font-weight:800;font-size:26px;padding:12px 28px;border-radius:999px}
+</style>
+<canvas id="c" width="1200" height="630"></canvas>
+<img class="icon" src="file:///home/claude/pull-site/icon.png">
+<h1>PULL<span>Magnet Sort</span></h1>
+<p>Sort the magnets.<br>Reveal the picture.</p>
+<div class="pill">Free on iPhone</div>
+<script>
+const c=document.getElementById('c').getContext('2d');
+let s=7;function r(){s=(s*16807)%2147483647;return s/2147483647}
+// beads: grid fading toward a magnet at right
+const mx=900,my=300,cols=['#F28C28','#FFF4E0','#1DA4A8','#F5C451','#E8702A'];
+const step=34;
+for(let y=-10;y<660;y+=step){for(let x=640;x<1230;x+=step){
+ const gx=x+(Math.floor(y/step)%2?step/2:0);
+ const d=Math.hypot(gx-mx,y-my);
+ let p=Math.min(1,Math.max(0,(gx-640)/260));
+ if(r()>p*0.95+0.02)continue;
+ // beads near magnet get pulled and thinned
+ let ox=0,oy=0;if(d<330){const k=(330-d)/330;ox=(mx-gx)*k*0.18*r();oy=(my-y)*k*0.18*r();}
+ const rad=11-(d<260?0:1);
+ c.globalAlpha=.25+.75*Math.min(1,(gx-640)/400);
+ const col=cols[Math.floor(r()*cols.length)];
+ c.fillStyle=col;c.beginPath();c.arc(gx+ox,y+oy,rad,0,7);c.fill();
+ c.globalAlpha*=.9;c.fillStyle='rgba(255,255,255,.55)';c.beginPath();c.arc(gx+ox-3.5,y+oy-4,3.2,0,7);c.fill();
+}}
+c.globalAlpha=1;
+// horseshoe magnet
+c.save();c.translate(mx,my);c.rotate(-0.45);
+c.lineCap='butt';
+c.lineWidth=58;c.strokeStyle='#E5483B';c.beginPath();c.arc(0,0,92,Math.PI,0,false);c.lineTo(92,-0);c.stroke();
+c.beginPath();c.moveTo(-92,0);c.lineTo(-92,0);c.stroke();
+// legs
+c.lineWidth=58;c.strokeStyle='#E5483B';
+c.beginPath();c.moveTo(-92,0);c.lineTo(-92,90);c.moveTo(92,0);c.lineTo(92,90);c.stroke();
+c.strokeStyle='#C9CDD8';c.beginPath();c.moveTo(-92,90);c.lineTo(-92,140);c.moveTo(92,90);c.lineTo(92,140);c.stroke();
+c.lineWidth=8;c.strokeStyle='rgba(255,255,255,.35)';c.beginPath();c.arc(0,0,108,Math.PI*1.05,Math.PI*1.6);c.stroke();
+c.restore();
+</script>

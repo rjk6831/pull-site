@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>PULL: Magnet Sort</title>
+<meta name="description" content="Place magnets to pull matching beads off a hidden picture. Sort the magnets. Reveal the picture.">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#1B1A33" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#FFF7EA" media="(prefers-color-scheme: light)">
+<link rel="canonical" href="https://rjk6831.github.io/pull-site/get/">
+<link rel="icon" href="../icon.png"><link rel="apple-touch-icon" href="../icon.png">
+<meta property="og:type" content="website"><meta property="og:site_name" content="PULL: Magnet Sort">
+<meta property="og:title" content="PULL: Magnet Sort">
+<meta property="og:description" content="Sort the magnets. Reveal the picture. Free on iPhone, Android coming soon.">
+<meta property="og:url" content="https://rjk6831.github.io/pull-site/get/">
+<meta property="og:image" content="https://rjk6831.github.io/pull-site/get/og.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="PULL: Magnet Sort app icon beside a red horseshoe magnet pulling colored beads">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="PULL: Magnet Sort">
+<meta name="twitter:description" content="Sort the magnets. Reveal the picture. Free on iPhone, Android coming soon.">
+<meta name="twitter:image" content="https://rjk6831.github.io/pull-site/get/og.png">
+<meta name="twitter:image:alt" content="PULL: Magnet Sort app icon beside a red horseshoe magnet pulling colored beads">
+<style>
+:root{--bg:#1B1A33;--bg2:#2A2752;--panel:#2A2752;--text:#FFF4E0;--muted:#CFC6E8;--teal:#2FC3C8;--tealbtn:#1DA4A8;--gold:#F5C451;--coral:#FF7A66;--coral-h:#FF9080;--ink:#1B1A33;--line:rgba(255,244,224,.18);--bead1:#F28C28;--bead2:#FFF4E0;--bead3:#1DA4A8;--bead4:#F5C451;--glow:rgba(47,195,200,.22)}
+@media (prefers-color-scheme:light){:root:not([data-theme=dark]){--bg:#FFF7EA;--bg2:#FFEBD0;--panel:#FFFFFF;--text:#1B1A33;--muted:#4A4670;--teal:#0B6E72;--tealbtn:#0B6E72;--gold:#8A5A00;--coral-h:#FF8F7D;--line:rgba(27,26,51,.2);--bead2:#2A2752;--glow:rgba(29,164,168,.18)}}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;min-height:100vh;min-height:100dvh;background:radial-gradient(900px 520px at 80% -10%,var(--glow),transparent 70%),linear-gradient(180deg,var(--bg),var(--bg2));background-color:var(--bg);color:var(--text);font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans Thai",sans-serif;display:flex;flex-direction:column}
+main{flex:1;width:100%;max-width:980px;margin:0 auto;padding:max(24px,env(safe-area-inset-top)) 16px 24px;display:flex;flex-direction:column;justify-content:center}
+.hero{display:grid;gap:28px;justify-items:center;text-align:center}
+.stage{position:relative;width:196px;height:196px;display:grid;place-items:center;margin-top:8px}
+.stage img{position:relative;z-index:1;width:132px;height:132px;border-radius:30px;box-shadow:0 14px 34px rgba(0,0,0,.35),0 0 0 1px var(--line)}
+.bead{position:absolute;left:50%;top:50%;width:11px;height:11px;margin:-5.5px;border-radius:50%;background:var(--c);opacity:0;box-shadow:inset -2px -2px 0 rgba(0,0,0,.18),inset 2px 2px 0 rgba(255,255,255,.35);animation:pull 4.8s cubic-bezier(.5,0,.2,1) infinite;animation-delay:var(--d)}
+@keyframes pull{0%{transform:translate(var(--x),var(--y)) scale(.7);opacity:0}15%{opacity:.95}70%{transform:translate(calc(var(--x)*.38),calc(var(--y)*.38)) scale(1);opacity:.95}100%{transform:translate(0,0) scale(.4);opacity:0}}
+h1{margin:0;font-size:clamp(32px,8.5vw,52px);line-height:1.08;letter-spacing:-.02em;font-weight:800}
+h1 small{display:block;font-size:.55em;font-weight:700;color:var(--gold);letter-spacing:-.01em;margin-top:6px}
+.pitch{margin:10px 0 0;font-size:clamp(18px,4.8vw,22px);color:var(--muted)}
+.actions{display:grid;gap:12px;width:100%;max-width:360px}
+.btn{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;padding:10px 22px;border-radius:999px;font-weight:800;font-size:18px;line-height:1.2;text-decoration:none;border:2px solid transparent;transition:transform .15s ease,background-color .15s ease,box-shadow .15s ease;-webkit-tap-highlight-color:transparent}
+.btn small{font-size:13px;font-weight:600;opacity:.9}
+.btn.primary{background:var(--coral);color:var(--ink);box-shadow:0 8px 22px rgba(255,122,102,.32)}
+.btn.primary:hover{background:var(--coral-h);transform:translateY(-2px)}
+.btn.primary:active{transform:translateY(0) scale(.98)}
+.btn.secondary{background:transparent;color:var(--text);border-color:var(--line)}
+.btn.secondary[href]{border-color:var(--teal);color:var(--text)}
+.btn.secondary[href]:hover{background:var(--glow)}
+.btn[aria-disabled=true]{cursor:default;opacity:1;color:var(--muted)}
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+.status{min-height:24px;margin:0;color:var(--muted);font-size:15px}
+.bar{display:none;width:120px;height:4px;border-radius:4px;background:var(--line);overflow:hidden;margin:0 auto}
+.redirecting .bar{display:block}.bar i{display:block;height:100%;width:100%;background:var(--teal);transform-origin:left;animation:fill .6s linear forwards}
+@keyframes fill{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.qr{display:none;text-align:center}
+.qr figure{margin:0;display:inline-block;background:#fff;padding:12px;border-radius:20px;box-shadow:0 10px 30px rgba(0,0,0,.28)}
+.qr svg{display:block;width:168px;height:168px}
+.qr figcaption{margin-top:10px;color:var(--muted);font-size:14px}
+.qr figcaption{margin-top:0;padding-top:12px;color:#4A4670}
+footer{padding:16px 16px max(20px,env(safe-area-inset-bottom));text-align:center;font-size:13px;color:var(--muted)}
+footer a{color:var(--teal);margin:0 8px}
+noscript .ns{max-width:360px;margin:16px auto 0;display:grid;gap:10px}
+@media (min-width:760px){
+ .hero{grid-template-columns:1fr auto;grid-template-areas:"stage qr" "copy qr";gap:24px 72px;text-align:left;justify-items:start;align-items:center}
+ .hero .stage{grid-area:stage}.hero .copy{grid-area:copy}
+ .qr{display:block;grid-area:qr;justify-self:center}
+ .hero{grid-template-columns:auto 220px;grid-template-areas:"stage qr" "copy qr";justify-content:center;column-gap:104px}
+ .stage{margin:0 0 0 -32px}
+ .actions{max-width:none;grid-template-columns:1fr 1fr;width:auto}
+ .actions .btn{min-width:200px}
+ .status,.bar{margin-left:0}
+}
+@media (hover:none) and (pointer:coarse){.qr{display:none!important}}
+@media (prefers-reduced-motion:reduce){.bead{animation:none;opacity:0}.btn{transition:none}.bar i{animation:none;transform:none}}
+</style></head>
+<body>
+<main>
+<section class="hero" id="hero" aria-labelledby="title">
+ <div class="stage" aria-hidden="true" id="stage"><img src="../icon.png" width="132" height="132" alt=""></div>
+ <div class="copy">
+  <h1 id="title">PULL<small>Magnet Sort</small></h1>
+  <p class="pitch" data-i18n="pitch">Sort the magnets. Reveal the picture.</p>
+  <div class="actions" style="margin-top:24px">
+   <a class="btn primary" id="ios" href="https://testflight.apple.com/join/2nsPVVzH"><span data-i18n="ios">Get it on iPhone</span></a>
+   <a class="btn secondary" id="android" aria-disabled="true"><span data-i18n="android">Get it on Android</span><small data-i18n="soon">Coming soon to Google Play</small></a>
+  </div>
+  <p class="status" id="status" role="status" aria-live="polite" style="margin-top:16px"></p>
+  <div class="bar" aria-hidden="true"><i></i></div>
+  <noscript><div class="ns">
+   <a class="btn primary" href="https://testflight.apple.com/join/2nsPVVzH">Get it on iPhone</a>
+   <a class="btn secondary" href="https://play.google.com/store/apps/details?id=com.rootsnolimits.pull">Get it on Android</a>
+  </div></noscript>
+ </div>
+ <aside class="qr" aria-label="Scan to open on your phone"><figure><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 33 33" shape-rendering="crispEdges" role="img" aria-label="QR code for https://rjk6831.github.io/pull-site/get/"><rect width="33" height="33" fill="#fff"/><path fill="#1B1A33" d="M2 2h1v1h-1zM3 2h1v1h-1zM4 2h1v1h-1zM5 2h1v1h-1zM6 2h1v1h-1zM7 2h1v1h-1zM8 2h1v1h-1zM12 2h1v1h-1zM13 2h1v1h-1zM14 2h1v1h-1zM15 2h1v1h-1zM16 2h1v1h-1zM20 2h1v1h-1zM22 2h1v1h-1zM24 2h1v1h-1zM25 2h1v1h-1zM26 2h1v1h-1zM27 2h1v1h-1zM28 2h1v1h-1zM29 2h1v1h-1zM30 2h1v1h-1zM2 3h1v1h-1zM8 3h1v1h-1zM10 3h1v1h-1zM15 3h1v1h-1zM16 3h1v1h-1zM18 3h1v1h-1zM19 3h1v1h-1zM24 3h1v1h-1zM30 3h1v1h-1zM2 4h1v1h-1zM4 4h1v1h-1zM5 4h1v1h-1zM6 4h1v1h-1zM8 4h1v1h-1zM10 4h1v1h-1zM11 4h1v1h-1zM13 4h1v1h-1zM14 4h1v1h-1zM16 4h1v1h-1zM18 4h1v1h-1zM20 4h1v1h-1zM21 4h1v1h-1zM24 4h1v1h-1zM26 4h1v1h-1zM27 4h1v1h-1zM28 4h1v1h-1zM30 4h1v1h-1zM2 5h1v1h-1zM4 5h1v1h-1zM5 5h1v1h-1zM6 5h1v1h-1zM8 5h1v1h-1zM10 5h1v1h-1zM13 5h1v1h-1zM14 5h1v1h-1zM15 5h1v1h-1zM17 5h1v1h-1zM18 5h1v1h-1zM19 5h1v1h-1zM22 5h1v1h-1zM24 5h1v1h-1zM26 5h1v1h-1zM27 5h1v1h-1zM28 5h1v1h-1zM30 5h1v1h-1zM2 6h1v1h-1zM4 6h1v1h-1zM5 6h1v1h-1zM6 6h1v1h-1zM8 6h1v1h-1zM11 6h1v1h-1zM12 6h1v1h-1zM13 6h1v1h-1zM14 6h1v1h-1zM19 6h1v1h-1zM20 6h1v1h-1zM21 6h1v1h-1zM22 6h1v1h-1zM24 6h1v1h-1zM26 6h1v1h-1zM27 6h1v1h-1zM28 6h1v1h-1zM30 6h1v1h-1zM2 7h1v1h-1zM8 7h1v1h-1zM12 7h1v1h-1zM13 7h1v1h-1zM16 7h1v1h-1zM18 7h1v1h-1zM20 7h1v1h-1zM22 7h1v1h-1zM24 7h1v1h-1zM30 7h1v1h-1zM2 8h1v1h-1zM3 8h1v1h-1zM4 8h1v1h-1zM5 8h1v1h-1zM6 8h1v1h-1zM7 8h1v1h-1zM8 8h1v1h-1zM10 8h1v1h-1zM12 8h1v1h-1zM14 8h1v1h-1zM16 8h1v1h-1zM18 8h1v1h-1zM20 8h1v1h-1zM22 8h1v1h-1zM24 8h1v1h-1zM25 8h1v1h-1zM26 8h1v1h-1zM27 8h1v1h-1zM28 8h1v1h-1zM29 8h1v1h-1zM30 8h1v1h-1zM10 9h1v1h-1zM12 9h1v1h-1zM16 9h1v1h-1zM18 9h1v1h-1zM22 9h1v1h-1zM2 10h1v1h-1zM10 10h1v1h-1zM11 10h1v1h-1zM12 10h1v1h-1zM14 10h1v1h-1zM15 10h1v1h-1zM16 10h1v1h-1zM17 10h1v1h-1zM19 10h1v1h-1zM22 10h1v1h-1zM23 10h1v1h-1zM24 10h1v1h-1zM27 10h1v1h-1zM28 10h1v1h-1zM29 10h1v1h-1zM3 11h1v1h-1zM5 11h1v1h-1zM6 11h1v1h-1zM9 11h1v1h-1zM11 11h1v1h-1zM12 11h1v1h-1zM13 11h1v1h-1zM14 11h1v1h-1zM17 11h1v1h-1zM19 11h1v1h-1zM20 11h1v1h-1zM21 11h1v1h-1zM23 11h1v1h-1zM26 11h1v1h-1zM28 11h1v1h-1zM29 11h1v1h-1zM2 12h1v1h-1zM3 12h1v1h-1zM4 12h1v1h-1zM7 12h1v1h-1zM8 12h1v1h-1zM9 12h1v1h-1zM11 12h1v1h-1zM12 12h1v1h-1zM13 12h1v1h-1zM16 12h1v1h-1zM17 12h1v1h-1zM19 12h1v1h-1zM23 12h1v1h-1zM24 12h1v1h-1zM2 13h1v1h-1zM3 13h1v1h-1zM4 13h1v1h-1zM6 13h1v1h-1zM9 13h1v1h-1zM10 13h1v1h-1zM13 13h1v1h-1zM18 13h1v1h-1zM25 13h1v1h-1zM26 13h1v1h-1zM27 13h1v1h-1zM2 14h1v1h-1zM7 14h1v1h-1zM8 14h1v1h-1zM11 14h1v1h-1zM13 14h1v1h-1zM14 14h1v1h-1zM16 14h1v1h-1zM17 14h1v1h-1zM20 14h1v1h-1zM22 14h1v1h-1zM23 14h1v1h-1zM24 14h1v1h-1zM30 14h1v1h-1zM2 15h1v1h-1zM4 15h1v1h-1zM5 15h1v1h-1zM6 15h1v1h-1zM9 15h1v1h-1zM10 15h1v1h-1zM14 15h1v1h-1zM15 15h1v1h-1zM17 15h1v1h-1zM18 15h1v1h-1zM19 15h1v1h-1zM20 15h1v1h-1zM21 15h1v1h-1zM22 15h1v1h-1zM23 15h1v1h-1zM24 15h1v1h-1zM26 15h1v1h-1zM29 15h1v1h-1zM30 15h1v1h-1zM3 16h1v1h-1zM6 16h1v1h-1zM8 16h1v1h-1zM10 16h1v1h-1zM11 16h1v1h-1zM15 16h1v1h-1zM16 16h1v1h-1zM17 16h1v1h-1zM18 16h1v1h-1zM19 16h1v1h-1zM23 16h1v1h-1zM25 16h1v1h-1zM27 16h1v1h-1zM28 16h1v1h-1zM3 17h1v1h-1zM4 17h1v1h-1zM7 17h1v1h-1zM12 17h1v1h-1zM14 17h1v1h-1zM18 17h1v1h-1zM23 17h1v1h-1zM28 17h1v1h-1zM30 17h1v1h-1zM2 18h1v1h-1zM3 18h1v1h-1zM5 18h1v1h-1zM6 18h1v1h-1zM8 18h1v1h-1zM11 18h1v1h-1zM12 18h1v1h-1zM13 18h1v1h-1zM14 18h1v1h-1zM19 18h1v1h-1zM22 18h1v1h-1zM23 18h1v1h-1zM27 18h1v1h-1zM28 18h1v1h-1zM2 19h1v1h-1zM3 19h1v1h-1zM4 19h1v1h-1zM5 19h1v1h-1zM9 19h1v1h-1zM10 19h1v1h-1zM11 19h1v1h-1zM12 19h1v1h-1zM15 19h1v1h-1zM17 19h1v1h-1zM18 19h1v1h-1zM21 19h1v1h-1zM22 19h1v1h-1zM23 19h1v1h-1zM24 19h1v1h-1zM25 19h1v1h-1zM26 19h1v1h-1zM28 19h1v1h-1zM29 19h1v1h-1zM30 19h1v1h-1zM2 20h1v1h-1zM3 20h1v1h-1zM5 20h1v1h-1zM6 20h1v1h-1zM8 20h1v1h-1zM11 20h1v1h-1zM13 20h1v1h-1zM14 20h1v1h-1zM17 20h1v1h-1zM19 20h1v1h-1zM20 20h1v1h-1zM21 20h1v1h-1zM23 20h1v1h-1zM24 20h1v1h-1zM25 20h1v1h-1zM27 20h1v1h-1zM30 20h1v1h-1zM2 21h1v1h-1zM10 21h1v1h-1zM12 21h1v1h-1zM13 21h1v1h-1zM15 21h1v1h-1zM17 21h1v1h-1zM20 21h1v1h-1zM23 21h1v1h-1zM2 22h1v1h-1zM4 22h1v1h-1zM7 22h1v1h-1zM8 22h1v1h-1zM12 22h1v1h-1zM13 22h1v1h-1zM14 22h1v1h-1zM16 22h1v1h-1zM17 22h1v1h-1zM18 22h1v1h-1zM19 22h1v1h-1zM21 22h1v1h-1zM22 22h1v1h-1zM23 22h1v1h-1zM24 22h1v1h-1zM25 22h1v1h-1zM26 22h1v1h-1zM28 22h1v1h-1zM29 22h1v1h-1zM30 22h1v1h-1zM16 23h1v1h-1zM17 23h1v1h-1zM22 23h1v1h-1zM26 23h1v1h-1zM27 23h1v1h-1zM2 24h1v1h-1zM3 24h1v1h-1zM4 24h1v1h-1zM5 24h1v1h-1zM6 24h1v1h-1zM7 24h1v1h-1zM8 24h1v1h-1zM11 24h1v1h-1zM12 24h1v1h-1zM13 24h1v1h-1zM17 24h1v1h-1zM18 24h1v1h-1zM21 24h1v1h-1zM22 24h1v1h-1zM24 24h1v1h-1zM26 24h1v1h-1zM27 24h1v1h-1zM28 24h1v1h-1zM2 25h1v1h-1zM8 25h1v1h-1zM14 25h1v1h-1zM16 25h1v1h-1zM18 25h1v1h-1zM21 25h1v1h-1zM22 25h1v1h-1zM26 25h1v1h-1zM2 26h1v1h-1zM4 26h1v1h-1zM5 26h1v1h-1zM6 26h1v1h-1zM8 26h1v1h-1zM11 26h1v1h-1zM15 26h1v1h-1zM16 26h1v1h-1zM18 26h1v1h-1zM21 26h1v1h-1zM22 26h1v1h-1zM23 26h1v1h-1zM24 26h1v1h-1zM25 26h1v1h-1zM26 26h1v1h-1zM27 26h1v1h-1zM29 26h1v1h-1zM2 27h1v1h-1zM4 27h1v1h-1zM5 27h1v1h-1zM6 27h1v1h-1zM8 27h1v1h-1zM11 27h1v1h-1zM14 27h1v1h-1zM16 27h1v1h-1zM17 27h1v1h-1zM19 27h1v1h-1zM20 27h1v1h-1zM21 27h1v1h-1zM22 27h1v1h-1zM27 27h1v1h-1zM28 27h1v1h-1zM30 27h1v1h-1zM2 28h1v1h-1zM4 28h1v1h-1zM5 28h1v1h-1zM6 28h1v1h-1zM8 28h1v1h-1zM13 28h1v1h-1zM14 28h1v1h-1zM15 28h1v1h-1zM17 28h1v1h-1zM21 28h1v1h-1zM23 28h1v1h-1zM24 28h1v1h-1zM25 28h1v1h-1zM26 28h1v1h-1zM27 28h1v1h-1zM28 28h1v1h-1zM29 28h1v1h-1zM2 29h1v1h-1zM8 29h1v1h-1zM11 29h1v1h-1zM13 29h1v1h-1zM15 29h1v1h-1zM20 29h1v1h-1zM23 29h1v1h-1zM27 29h1v1h-1zM28 29h1v1h-1zM30 29h1v1h-1zM2 30h1v1h-1zM3 30h1v1h-1zM4 30h1v1h-1zM5 30h1v1h-1zM6 30h1v1h-1zM7 30h1v1h-1zM8 30h1v1h-1zM10 30h1v1h-1zM11 30h1v1h-1zM12 30h1v1h-1zM13 30h1v1h-1zM19 30h1v1h-1zM21 30h1v1h-1zM23 30h1v1h-1zM24 30h1v1h-1zM26 30h1v1h-1zM27 30h1v1h-1zM28 30h1v1h-1z"/></svg><figcaption data-i18n="scan">Scan with your phone</figcaption></figure></aside>
+</section>
+</main>
+<footer><a href="../privacy.html">Privacy</a><a href="../terms.html">Terms</a><a href="../support.html">Support</a><div style="margin-top:6px">Roots No Limits LLC</div></footer>
+<script>
+// ---- Config ----
+var IOS_URL="https://testflight.apple.com/join/2nsPVVzH";
+var ANDROID_URL="https://play.google.com/store/apps/details?id=com.rootsnolimits.pull";
+var ANDROID_LIVE=false;
+var REDIRECT_DELAY_MS=600;
+// ---- Copy ----
+var STRINGS={
+ en:{pitch:"Sort the magnets. Reveal the picture.",ios:"Get it on iPhone",android:"Get it on Android",soon:"Coming soon to Google Play",scan:"Scan with your phone",opening:"Opening PULL…",alt:"Android version coming soon. Get it on iPhone now."},
+ th:{pitch:"จัดเรียงแม่เหล็ก เผยภาพลับ",ios:"ดาวน์โหลดบน iPhone",android:"ดาวน์โหลดบน Android",soon:"เร็วๆ นี้บน Google Play",scan:"สแกนด้วยมือถือของคุณ",opening:"กำลังเปิด PULL…",alt:"เวอร์ชัน Android เร็วๆ นี้ ดาวน์โหลดบน iPhone ได้แล้ว"}
+};
+(function(){
+ var lang=((navigator.language||"en")+"").toLowerCase().indexOf("th")===0?"th":"en";
+ var S=STRINGS[lang];
+ document.documentElement.lang=lang;
+ var els=document.querySelectorAll("[data-i18n]");
+ for(var i=0;i<els.length;i++){var k=els[i].getAttribute("data-i18n");if(S[k])els[i].textContent=S[k];}
+
+ // ---- src passthrough ----
+ var m=/[?&]src=([^&#]*)/.exec(location.search),src="";
+ if(m){try{src=decodeURIComponent(m[1])}catch(e){}src=src.replace(/[^A-Za-z0-9_\-]/g,"").slice(0,40);}
+ function withSrc(url,kind){
+  if(!src)return url;
+  if(kind==="play")return url+(url.indexOf("?")<0?"?":"&")+"referrer=utm_source%3Dshare%26utm_content%3D"+src;
+  // Hook for when IOS_URL becomes an App Store URL. Never added to TestFlight links.
+  if(kind==="ios"&&/^https:\/\/apps\.apple\.com\//.test(url))return url+(url.indexOf("?")<0?"?":"&")+"ct="+src;
+  return url;
+ }
+ var iosHref=withSrc(IOS_URL,"ios"),playHref=withSrc(ANDROID_URL,"play");
+ var ios=document.getElementById("ios"),and=document.getElementById("android"),status=document.getElementById("status");
+ ios.href=iosHref;
+ if(ANDROID_LIVE){and.href=playHref;and.removeAttribute("aria-disabled");var sm=and.querySelector("small");if(sm)sm.style.display="none";}
+
+ // ---- Device ----
+ var ua=navigator.userAgent||"";
+ var isIOS=/iPhone|iPad|iPod/.test(ua)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1);
+ var isAndroid=/Android/i.test(ua);
+ var target=isIOS?iosHref:(isAndroid&&ANDROID_LIVE?playHref:"");
+ var reduce=window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+ // ---- Bead motion ----
+ if(!reduce){
+  var st=document.getElementById("stage"),cols=["--bead1","--bead2","--bead3","--bead4"],html="";
+  for(var j=0;j<14;j++){
+   var a=(j/14)*Math.PI*2+(j%3)*0.2,r=88+(j%4)*6;
+   html+='<span class="bead" style="--x:'+Math.round(Math.cos(a)*r)+'px;--y:'+Math.round(Math.sin(a)*r)+'px;--c:var('+cols[j%4]+');--d:-'+((j*0.34).toFixed(2))+'s"></span>';
+  }
+  st.insertAdjacentHTML("afterbegin",html);
+ }
+
+ // ---- Route ----
+ if(target){
+  status.textContent=S.opening;
+  document.getElementById("hero").classList.add("redirecting");
+  setTimeout(function(){location.replace(target)},reduce?0:REDIRECT_DELAY_MS);
+ }else if(isAndroid){status.textContent=S.alt;}
+})();
+</script>
+</body></html>
