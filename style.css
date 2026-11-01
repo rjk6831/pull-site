@@ -6,4 +6,6 @@ h1{font-size:30px;line-height:1.2;margin:8px 0 16px}h2{font-size:20px;margin:28p
 a{color:var(--teal)}p,li{color:var(--text)}.muted{color:var(--muted);font-size:14px}
 .card{background:var(--panel);border-radius:16px;padding:20px;margin:16px 0}
 .btn{display:inline-block;background:var(--teal);color:#fff;font-weight:700;padding:14px 22px;border-radius:999px;text-decoration:none;margin:8px 8px 0 0}
-nav{margin-top:40px;font-size:14px}nav a{margin-right:16px}
+nav{margin-top:40px;font-size:14px}nav a{margin-right:16px}.hero{text-align:center;padding:8px 0}.hero-icon{width:128px;height:128px;border-radius:28px;display:block;margin:0 auto 12px}
+.sub{color:var(--gold);font-weight:700;margin:-8px 0 16px}.stores{margin:20px 0 8px}.btn.alt{background:var(--panel);border:1px solid var(--teal)}
+footer{margin-top:16px}

@@ -1,20 +1,30 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>PULL: Magnet Sort</title><link rel="icon" href="icon.png"><link rel="stylesheet" href="style.css"></head>
-<body><main><header><img src="icon.png" alt=""><a href="index.html">PULL: Magnet Sort</a></header>
-<h1>Peel the picture, bead by bead.</h1>
-<p>Place magnets to pull matching beads off a hidden picture. Clear every bead to reveal it. Free to play on iPhone and Android.</p>
-<div class="card"><p><strong>Get PULL</strong></p>
-<a class="btn" id="get" href="#">Join the beta on iPhone</a>
-<p class="muted" id="note">The App Store and Google Play pages open here as soon as PULL is live.</p></div>
+<title>PULL: Magnet Sort by Roots No Limits LLC</title>
+<meta name="description" content="PULL: Magnet Sort is a satisfying ASMR bead puzzle game for iPhone and Android by Roots No Limits LLC.">
+<link rel="canonical" href="https://game.rootsnolimits.com/">
+<meta name="theme-color" content="#1B1A33">
+<meta property="og:type" content="website"><meta property="og:title" content="PULL: Magnet Sort">
+<meta property="og:description" content="Satisfying ASMR bead puzzle. Free on iPhone and Android.">
+<meta property="og:url" content="https://game.rootsnolimits.com/"><meta property="og:image" content="https://game.rootsnolimits.com/get/og.png">
+<link rel="icon" href="icon.png"><link rel="apple-touch-icon" href="icon.png"><link rel="stylesheet" href="style.css"></head>
+<body><main>
+<section class="hero">
+<img class="hero-icon" src="icon.png" width="128" height="128" alt="PULL: Magnet Sort app icon">
+<h1>PULL: Magnet Sort</h1>
+<p class="sub">Satisfying ASMR bead puzzle</p>
+<p>Drop a magnet and hear the beads come running. Beads peel off the board in long cascades, and a hidden picture shows through, bead by bead. 100 pictures in 5 packs, a new daily puzzle, and no account needed.</p>
+<div class="stores">
+<a class="btn" id="ios" href="https://testflight.apple.com/join/2nsPVVzH">iPhone beta on TestFlight</a>
+<a class="btn alt" id="play" href="https://play.google.com/store/apps/details?id=com.rootsnolimits.pull">Get it on Google Play</a>
+</div>
+<p class="muted" id="note">Free to play with ads and optional in-app purchases. The iPhone link moves to the App Store when PULL goes live there.</p>
+</section>
 <script>
-// Store links are filled in at launch; until then the beta link is used.
-var LINKS={beta:"https://testflight.apple.com/join/2nsPVVzH",appStore:"",play:""};
-var a=document.getElementById('get');
-if(LINKS.appStore){a.href=LINKS.appStore;a.textContent='Download on the App Store';}
-else if(LINKS.beta){a.href=LINKS.beta;}
-else{a.style.display='none';}
+// Set APP_STORE when the App Store listing is live; the iPhone button then points there.
+var APP_STORE="";
+if(APP_STORE){var a=document.getElementById('ios');a.href=APP_STORE;a.textContent='Download on the App Store';document.getElementById('note').textContent='Free to play with ads and optional in-app purchases.';}
 </script>
-<nav><a href="index.html">Home</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="support.html">Support</a></nav>
-<p class="muted">PULL is made by Roots No Limits LLC, 1021 E Lincolnway #7030, Cheyenne, WY 82001, USA.</p>
+<nav><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="support.html">Support</a><a href="delete-data.html">Delete my data</a></nav>
+<footer class="muted">Roots No Limits LLC<br>1021 E Lincolnway #7030, Cheyenne, WY 82001, USA</footer>
 </main></body></html>
